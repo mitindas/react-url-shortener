@@ -11,7 +11,6 @@ app.use(cors(
     {
         origin: ["deployed-vercel-frontend-app","localhost:3000"],
         methods: ["POST", "GET"],
-        credentials: true
     }
 ));app.use(express.json());
 app.use(express.urlencoded({extended: true}))

@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors(
     {
-        origin: ["deployed-vercel-frontend-app","localhost:3000"],
+        origin: ["https://react-url-xi.vercel.app/","localhost:3000"],
         methods: ["POST", "GET"],
     }
 ));app.use(express.json());
@@ -27,11 +27,11 @@ const connect = async () => {
 	}
 };
 
-connect();
 
 //POST
 
 app.post("/", async (req, res) => {
+	connect();
 	const { longUrl } = req.body;
 	const shortUrl = nanoid(7);
 	const newUrl = new URLSchema({
@@ -45,6 +45,7 @@ app.post("/", async (req, res) => {
 //GET
 
 app.get("/:id", async (req, res) => {
+	connect();
 	const {id} = req.params;
 	const url = await URLSchema.findOne({short_url: id});
 	if (url) {

@@ -27,6 +27,8 @@ const connect = async () => {
 	}
 };
 
+connect();
+
 //POST
 
 app.post("/", async (req, res) => {
@@ -54,7 +56,7 @@ app.get("/:id", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(port, () => {
-	connect();
-	console.log("\n\n Server on http://localhost:5000/");
-})
+// app.listen(port, () => {
+// 	connect();
+// 	console.log("\n\n Server on http://localhost:5000/");
+// })

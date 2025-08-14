@@ -20,7 +20,7 @@ const HomePage = () => {
 	return (
 	<div className="min-h-screen bg-gray-50 flex flex-col">
   {/* Hero Section */}
-  <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+  <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
     <div className="text-center mb-12">
       <h1 className="text-4xl md:text-5xl font-normal text-gray-900 mb-4">
         Shorten URLs

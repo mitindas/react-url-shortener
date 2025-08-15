@@ -26,6 +26,7 @@ async function createShortId() {
 
 app.post("/", async (req, res) => {
   await connect();
+  const { longUrl } = req.body;
   const shortUrl = createShortId(); 
   const newUrl = new URLSchema({
 		long_url: longUrl,

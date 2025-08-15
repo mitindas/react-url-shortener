@@ -7,7 +7,6 @@ require("dotenv").config();
 
 const app = express();
 
-// app.get('/favicon.ico', (req, res) => res.status(204).end());
 app.use(cors({ origin: ["https://react-url-xi.vercel.app", "http://localhost:3000"] }));
 app.use(express.json());
 
@@ -23,17 +22,30 @@ async function createShortId() {
   return nanoid(7);
 }
 
+//POST
+
 app.post("/", async (req, res) => {
   await connect();
-  const shortUrl = await createShortId(); 
-  const doc = await URL.create({ long_url: req.body.longUrl, short_url: shortUrl });
-  res.send(process.env.APP_URL + doc.short_url);
+  const shortUrl = createShortId(); 
+  const newUrl = new URLSchema({
+		long_url: longUrl,
+		short_url: shortUrl
+	});
+	await newUrl.save();
+	res.send(process.env.APP_URL + newUrl.short_url);
 });
+
+//GET?
 
 app.get("/:id", async (req, res) => {
   await connect();
-  const doc = await URL.findOne({ short_url: req.params.id });
-  doc ? res.redirect(doc.long_url) : res.sendStatus(404);
+  const {id} = req.params;
+	const url = await URLSchema.findOne({short_url: id});
+	if (url) {
+		res.redirect(url.long_url);
+	} else {
+		res.status(404).send("URL not found");
+	}
 });
 
 module.exports = app;

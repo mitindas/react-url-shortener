@@ -5,17 +5,20 @@ const cors = require("cors");
 const { nanoid } = require("nanoid");
 const URLSchema = require("./models/Schema");
 
+dotenv.config();
+
 const app = express();
 
 app.use(cors(
     {
-        origin: ["https://react-url-xi.vercel.app/","localhost:3000"],
+        origin: ["https://react-url-xi.vercel.app","http://localhost:3000"],
         methods: ["POST", "GET"],
     }
-));app.use(express.json());
+));
+
+app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-dotenv.config();
 const connect = async () => {
 	try {
 		await mongoose.connect(process.env.MONGO_URL, {
@@ -55,9 +58,4 @@ app.get("/:id", async (req, res) => {
 	}
 });
 
-const PORT = process.env.PORT || 5000;
-
-// app.listen(port, () => {
-// 	connect();
-// 	console.log("\n\n Server on http://localhost:5000/");
-// })
+module.exports = app;

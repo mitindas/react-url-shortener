@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 const HomePage = () => {
-	const APP_URL = 'https://u-l.onrender.com/';
+	const APP_URL = 'https://react-url-shortener-pi.vercel.app/';
 	const [longUrl, setlongUrl] = useState('');
 	const [shortUrl, setshortUrl] = useState('');
 	const handleSubmit = async () => {

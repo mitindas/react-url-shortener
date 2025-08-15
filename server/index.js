@@ -1,12 +1,19 @@
-const express = require("express");
-const mongoose = require("mongoose");
+const express   = require("express");
+const mongoose  = require("mongoose");
 const { nanoid} = require("nanoid");
-const cors = require("cors");
-const URL = require("./models/Schema");
+const cors      = require("cors");
+const URL       = require("./models/Schema");
+
+const favicon = require('serve-favicon');
+const path = require('path');
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 
 require("dotenv").config();
 
 const app = express();
+
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 app.use(cors({ origin: ["https://react-url-xi.vercel.app", "http://localhost:3000"] }));
 app.use(express.json());

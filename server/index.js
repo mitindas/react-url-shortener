@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const app = express();
 
-app.get('/favicon.ico', (req, res) => res.status(204).end());
+// app.get('/favicon.ico', (req, res) => res.status(204).end());
 app.use(cors({ origin: ["https://react-url-xi.vercel.app", "http://localhost:3000"] }));
 app.use(express.json());
 
@@ -18,7 +18,6 @@ const connect = () =>
     useUnifiedTopology: true
   }));
 
-// Dynamic import function for nanoid
 async function createShortId() {
   const { nanoid } = await import('nanoid');
   return nanoid(7);
@@ -26,7 +25,7 @@ async function createShortId() {
 
 app.post("/", async (req, res) => {
   await connect();
-  const shortUrl = await createShortId(); // Use dynamic import
+  const shortUrl = await createShortId(); 
   const doc = await URL.create({ long_url: req.body.longUrl, short_url: shortUrl });
   res.send(process.env.APP_URL + doc.short_url);
 });

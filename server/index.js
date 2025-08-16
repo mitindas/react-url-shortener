@@ -29,12 +29,12 @@ async function createShortId() {
 app.post("/", async (req, res) => {
   await connect();
   const { longUrl } = req.body;
-  const shortUrl = createShortId(); 
+  const shortUrl = await createShortId(); 
   const newUrl = new URLSchema({
 		long_url: longUrl,
 		short_url: shortUrl
 	});
-	await newUrl.save();
+	newUrl.save();
 	res.send(process.env.APP_URL + newUrl.short_url);
 });
 

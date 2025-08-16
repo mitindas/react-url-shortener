@@ -45,7 +45,12 @@ app.get("/:id", async (req, res) => {
   const {id} = req.params;
 	const url = await URLSchema.findOne({short_url: id});
 	if (url) {
-		res.redirect(url.long_url);
+    let redUrl = url.long_url;
+    if(!redUrl.startsWith('http://') && !redUrl.startsWith('https://')) {
+      redUrl = 'https://' + redUrl;
+    }
+    console.log(redUrl);
+		res.redirect(redUrl);
 	} else {
 		res.status(404).send("URL not found");
 	}

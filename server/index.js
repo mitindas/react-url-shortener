@@ -1,14 +1,16 @@
-const express   = require("express");
-const mongoose  = require("mongoose");
-const cors      = require("cors");
-const URLSchema     = require("./models/Schema");
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const URLSchema = require("./models/Schema");
 
 require("dotenv").config();
 
 const app = express();
 
-app.use(cors({ origin: ["https://react-url-xi.vercel.app", "http://localhost:3000"] }));
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+
 
 let cached = null;
 const connect = () =>

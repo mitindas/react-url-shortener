@@ -19,9 +19,23 @@ const connect = () =>
     useUnifiedTopology: true
   }));
 
+// async function createShortId() {
+//   const { nanoid } = await import('nanoid');
+//   return nanoid(7);
+// }
+
 async function createShortId() {
   const { nanoid } = await import('nanoid');
-  return nanoid(7);
+  let isUnique = false;
+  let shortId;
+  while (!isUnique) {
+    shortId = nanoid(7);
+    const existing = await URLSchema.findOne({ short_url: shortId });
+    if (!existing) {
+      isUnique = true;
+    }
+  }
+  return shortId;
 }
 
 //POST
